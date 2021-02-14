@@ -1,4 +1,5 @@
-﻿using System;
+Robert, [13.02.21 23:41]
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -117,7 +118,8 @@ namespace winverify
             if (x.GetFirewallEnable(ProfileType.Domain) == false)
             {
 
-                txtScan.Text += "Failed to setup Domain firewall \n ";
+Robert, [13.02.21 23:41]
+txtScan.Text += "Failed to setup Domain firewall \n ";
             }
 
 
@@ -197,8 +199,8 @@ namespace winverify
                 Downloader.Updates = DownloadCollection;
                 Console.WriteLine("Downloading Updates... This may take several minutes.");
 
-
-                IDownloadResult DownloadResult = Downloader.Download();
+Robert, [13.02.21 23:41]
+IDownloadResult DownloadResult = Downloader.Download();
                 UpdateCollection InstallCollection = new UpdateCollection();
                 for (int i = 0; i < UpdateCollection.Count; i++)
                 {
@@ -284,7 +286,8 @@ namespace winverify
             List<String> antivirusList = new List<string>();
             Dictionary<String, String> serviceCodes = new Dictionary<String, String>();
 
-            foreach (ManagementObject virusChecker in data)
+Robert, [13.02.21 23:41]
+foreach (ManagementObject virusChecker in data)
             {
                 if (virusChecker["displayName"] != null)
                 {
@@ -331,9 +334,9 @@ namespace winverify
                         }
                         break;
                     case "397584":
-                        txtScan.Text += "Windows Defender is enabled and out of date. Please update windows defender.\n---------------------------------------------------------------\n";
+                        txtScan.Text += "Windows Defender is enabled and out of date. Trying to update windows defender now.\n---------------------------------------------------------------\n";
                         // Maybe I can update it using .net Will try to implement later
-                        // Code below creates a new process and runs the following command. Should run
+                        // Code below creates a new process and runs the following command. Should run the updater for Windows defedner
                         Process cmd = new Process();
                         cmd.StartInfo.FileName = "cmd.exe";
                         cmd.StartInfo.RedirectStandardInput = true;
@@ -346,7 +349,24 @@ namespace winverify
                         cmd.StandardInput.Flush();
                         cmd.StandardInput.Close();
                         cmd.WaitForExit();
-                        // Will implement into a log file later Console.WriteLine(cmd.StandardOutput.ReadToEnd());
+                        txtScan.Text += "Windows Defender was updated\n";
+
+Robert, [13.02.21 23:41]
+// Will implement into a log file later Console.WriteLine(cmd.StandardOutput.ReadToEnd());-------------------------------------------------
+                        Process cmd2 = new Process();
+                        cmd2.StartInfo.FileName = "cmd.exe";
+                        cmd2.StartInfo.RedirectStandardInput = true;
+                        cmd2.StartInfo.RedirectStandardOutput = true;
+                        cmd2.StartInfo.CreateNoWindow = true;
+                        cmd2.StartInfo.UseShellExecute = false;
+                        cmd2.Start();
+
+                        cmd2.StandardInput.WriteLine("\"C:\\Program Files\\Windows Defender\\MpCmdRun.exe\" -Scan -ScanType");
+                        cmd2.StandardInput.Flush();
+                        cmd2.StandardInput.Close();
+                        cmd2.WaitForExit();
+                        txtScan.Text += "Windows Defender was Ran.\n---------------------------------------------------------------\n";
+
                         break;
                     case "397568":
                         txtScan.Text += "Windows Defender is enabled and up to date. Great Job!\n---------------------------------------------------------------\n";
@@ -369,7 +389,20 @@ namespace winverify
             }
             else
             {
-                txtScan.Text += "System passed our security check! Please run Antivirus scanner to be sure.";
+                Process cmd2 = new Process();
+                cmd2.StartInfo.FileName = "cmd.exe";
+                cmd2.StartInfo.RedirectStandardInput = true;
+                cmd2.StartInfo.RedirectStandardOutput = true;
+                cmd2.StartInfo.CreateNoWindow = true;
+                cmd2.StartInfo.UseShellExecute = false;
+                cmd2.Start();
+
+                cmd2.StandardInput.WriteLine("\"C:\\Program Files\\Windows Defender\\MpCmdRun.exe\" -Scan -ScanType 1 ");
+                cmd2.StandardInput.Flush();
+                cmd2.StandardInput.Close();
+                cmd2.WaitForExit();
+                txtScan.Text += "Windows Defender was Ran.\n---------------------------------------------------------------\n";
+                txtScan.Text += "System passed our security check!.";
             }
 
         }
@@ -377,4 +410,3 @@ namespace winverify
 
     }
 }
-
