@@ -1,0 +1,9 @@
+WPF is the newer version of windows form so WPF is most likely will be
+WPF is the newer version of windows form
+System.Diagnostics - for windows diagnostics https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics?view=netframework-4.8
+Microsoft.Win32 Namespace - windows win32 api
+Main plan is to interpret log files maybe....
+or look up common issues that windows have
+or look up common security vulnerabiliteis and implement it into second windows
+
+Location of exe file is in winverify \winverify\bin\Debug\netcoreapp3.1

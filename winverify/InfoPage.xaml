@@ -1,0 +1,21 @@
+﻿<Window x:Class="winverify.InfoPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:winverify"
+        mc:Ignorable="d"
+        Title="InfoPage" Height="450" Width="800">
+    <Grid>
+        <TabControl>
+            <TabItem Width="400" Height="30" Header="Scan" Margin="0,-1,0,0" VerticalAlignment="Top">
+                <TextBlock x:Name="txtScan" Margin="0,2,20,-2"/>
+            </TabItem>
+
+            <TabItem Width="396" Height="30" Header="Logs">
+                <TextBlock x:Name="txtLog"/>
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+</Window>
